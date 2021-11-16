@@ -22,12 +22,13 @@ RUN mkdir /src
 COPY starspace_script.sh /src
 WORKDIR /src
 
-ENV starspace_input_file starspace_input_file.txt
-ENV model_output_file model_output_file
+ENV STARSPACE_INPUT_FILE starspace_input_file.txt
+ENV MODEL_OUTPUT_FILE model_output_file
 VOLUME /volume
 
 # create non-root user
 RUN useradd -ms /bin/bash newuser
 USER newuser
 
-ENTRYPOINT ["./starspace_script.sh"]
+#ENTRYPOINT ["./starspace_script.sh"]
+ENTRYPOINT ["./../Starspace/starspace", "train"]

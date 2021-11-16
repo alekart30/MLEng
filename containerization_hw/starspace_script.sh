@@ -1,2 +1,2 @@
 #!/bin/sh
-./../Starspace/starspace train -trainFile volume/$starspace_input_file -model volume/$model_output_file
+./../Starspace/starspace train -trainFile volume/$STARSPACE_INPUT_FILE -model volume/$MODEL_OUTPUT_FILE
