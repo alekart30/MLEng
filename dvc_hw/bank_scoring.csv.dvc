@@ -1,0 +1,5 @@
+outs:
+- md5: ff970f2b5fc4e2dab1312068cfbd1e6a
+  size: 250520
+  path: bank_scoring.csv
+  isexec: true
