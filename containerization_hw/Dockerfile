@@ -20,15 +20,18 @@ RUN git clone https://github.com/facebookresearch/Starspace.git \
 RUN mkdir /src
 COPY starspace_script.sh /src
 WORKDIR /src
+RUN chmod +x starspace_script.sh
 
 # env variables and volume
 ENV STARSPACE_INPUT_FILE starspace_input_file.txt
 ENV MODEL_OUTPUT_FILE model_output_file
+ARG USER_ID
+ARG GROUP_ID
 VOLUME /volume
 
 # create non-root user
-RUN groupadd -g 1001 joker
-RUN useradd -ms /bin/bash -u 1001 -g 1001 newuser
-USER newuser
+RUN groupadd -g $GROUP_ID group \
+    && useradd -ms /bin/bash -u $USER_ID -g $GROUP_ID user
+USER user
 
 ENTRYPOINT ["./starspace_script.sh"]
