@@ -1,0 +1,5 @@
+/bank_scoring.csv
+*.csv
+*.pkl
+*.png
+containerization_hw/volume/
