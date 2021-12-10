@@ -9,9 +9,6 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install -r dvc_hw/requirements.txt
           cd dvc_hw
-          python preprocess.py
-          python training.py
-          python evaluation.py
-          cat metrics.json
+          pip install -r requirements.txt
+          dvc repro
