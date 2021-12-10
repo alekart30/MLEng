@@ -3,36 +3,60 @@ stages:
   feature_importance:
     cmd: python feature_importance.py
     deps:
+    - path: X_test_transformed.csv
+      md5: c49eb838b9b5e2c2ec7b63e5a6e3c5bd
+      size: 375002
+    - path: X_train_transformed.csv
+      md5: 28894415819293d11026eea20dad88ed
+      size: 1125000
     - path: feature_importance.py
       md5: c21edb976b67333cd826f5eb88b4b7cb
       size: 800
+    - path: model.pkl
+      md5: e25d6de315f29967fdfa476a53edf76e
+      size: 1169
+    - path: preprocessor.pkl
+      md5: 1d013b1ce3c48bff583656fa2395bdaa
+      size: 11029
     outs:
     - path: feature_plot.png
-      md5: 390b3f591af8007fe4ab7479af78079e
-      size: 55506
+      md5: 94dee07e0b1038208217366fd21d4489
+      size: 55503
   training:
     cmd: python training.py
     deps:
+    - path: X_train_transformed.csv
+      md5: 28894415819293d11026eea20dad88ed
+      size: 1125000
     - path: training.py
       md5: f61f3fab05c31c6169192578709ddf88
       size: 420
+    - path: y_train.csv
+      md5: fdb11026df4d5f75edfae5f8a285f4fc
+      size: 18750
     outs:
     - path: model.pkl
-      md5: 69813b490ed1a2ea6b495466bfdb6580
+      md5: e25d6de315f29967fdfa476a53edf76e
       size: 1169
   preprocess:
     cmd: python preprocess.py
     deps:
+    - path: bank_scoring.csv
+      md5: bd255f0de38f0f83edfdee6ad51a9461
+      size: 250520
     - path: preprocess.py
       md5: 96c984cd6581a0f52cb28e55cd430972
       size: 2099
     outs:
     - path: X_test_transformed.csv
-      md5: 5a43760ff4ffd55299c25c463e143d30
+      md5: c49eb838b9b5e2c2ec7b63e5a6e3c5bd
       size: 375002
     - path: X_train_transformed.csv
-      md5: de757e2cbb719f3ce75d0554ca46c7d5
+      md5: 28894415819293d11026eea20dad88ed
       size: 1125000
+    - path: preprocessor.pkl
+      md5: 1d013b1ce3c48bff583656fa2395bdaa
+      size: 11029
     - path: y_test.csv
       md5: 49e365c8618cea2e328ba7366dca7558
       size: 6250
@@ -42,9 +66,18 @@ stages:
   evaluation:
     cmd: python evaluation.py
     deps:
+    - path: X_test_transformed.csv
+      md5: c49eb838b9b5e2c2ec7b63e5a6e3c5bd
+      size: 375002
     - path: evaluation.py
       md5: b40b56845096c5494eb4854851f53d32
       size: 539
+    - path: model.pkl
+      md5: e25d6de315f29967fdfa476a53edf76e
+      size: 1169
+    - path: y_test.csv
+      md5: 49e365c8618cea2e328ba7366dca7558
+      size: 6250
     outs:
     - path: metrics.json
       md5: 55f41e939f652016a7a09245133a4117

@@ -3,16 +3,20 @@ stages:
     cmd: python preprocess.py
     deps:
     - preprocess.py
+    - bank_scoring.csv
     outs:
     - X_train_transformed.csv
     - X_test_transformed.csv
     - y_train.csv
     - y_test.csv
+    - preprocessor.pkl
 
   training:
     cmd: python training.py
     deps:
     - training.py
+    - X_train_transformed.csv
+    - y_train.csv
     outs:
     - model.pkl
 
@@ -20,6 +24,9 @@ stages:
     cmd: python evaluation.py
     deps: 
     - evaluation.py
+    - X_test_transformed.csv
+    - y_test.csv
+    - model.pkl
     outs:
     - metrics.json
 
@@ -27,5 +34,9 @@ stages:
     cmd: python feature_importance.py
     deps:
     - feature_importance.py
+    - preprocessor.pkl
+    - X_train_transformed.csv
+    - X_test_transformed.csv
+    - model.pkl
     outs:
     - feature_plot.png
