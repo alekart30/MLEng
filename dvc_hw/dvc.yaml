@@ -1,0 +1,31 @@
+stages:
+  preprocess:
+    cmd: python preprocess.py
+    deps:
+    - preprocess.py
+    outs:
+    - X_train_transformed.csv
+    - X_test_transformed.csv
+    - y_train.csv
+    - y_test.csv
+
+  training:
+    cmd: python training.py
+    deps:
+    - training.py
+    outs:
+    - model.pkl
+
+  evaluation:
+    cmd: python evaluation.py
+    deps: 
+    - evaluation.py
+    outs:
+    - metrics.json
+
+  feature_importance:
+    cmd: python feature_importance.py
+    deps:
+    - feature_importance.py
+    outs:
+    - feature_plot.png
