@@ -10,4 +10,8 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
-          dvc repro
+          #dvc repro
+          python preprocess.py
+          python training.py
+          python evaluation.py
+          cat metrics.json
