@@ -9,7 +9,7 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install -r requirements.txt
+          pip install -r dvc_hw/requirements.txt
           python dvc_hw/preprocess.py
           python dvc_hw/training.py
           python dvc_hw/evaluation.py
