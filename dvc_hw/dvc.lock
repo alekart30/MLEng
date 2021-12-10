@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  feature_importance:
+    cmd: python feature_importance.py
+    deps:
+    - path: feature_importance.py
+      md5: c21edb976b67333cd826f5eb88b4b7cb
+      size: 800
+    outs:
+    - path: feature_plot.png
+      md5: 390b3f591af8007fe4ab7479af78079e
+      size: 55506
+  training:
+    cmd: python training.py
+    deps:
+    - path: training.py
+      md5: f61f3fab05c31c6169192578709ddf88
+      size: 420
+    outs:
+    - path: model.pkl
+      md5: 69813b490ed1a2ea6b495466bfdb6580
+      size: 1169
+  preprocess:
+    cmd: python preprocess.py
+    deps:
+    - path: preprocess.py
+      md5: 96c984cd6581a0f52cb28e55cd430972
+      size: 2099
+    outs:
+    - path: X_test_transformed.csv
+      md5: 5a43760ff4ffd55299c25c463e143d30
+      size: 375002
+    - path: X_train_transformed.csv
+      md5: de757e2cbb719f3ce75d0554ca46c7d5
+      size: 1125000
+    - path: y_test.csv
+      md5: 49e365c8618cea2e328ba7366dca7558
+      size: 6250
+    - path: y_train.csv
+      md5: fdb11026df4d5f75edfae5f8a285f4fc
+      size: 18750
+  evaluation:
+    cmd: python evaluation.py
+    deps:
+    - path: evaluation.py
+      md5: 2383387486e316b79de5d5bc5072cdeb
+      size: 539
+    outs:
+    - path: metrics.json
+      md5: 12790f68d3f114beb8c51b09da8f55ee
+      size: 17
