@@ -13,6 +13,7 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           cd dvc_hw
+          pip install --upgrade pip
           pip install -r requirements.txt
           
           dvc pull
