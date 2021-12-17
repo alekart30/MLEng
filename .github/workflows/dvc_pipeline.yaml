@@ -13,5 +13,13 @@ jobs:
         run: |
           cd dvc_hw
           pip install -r requirements.txt
+          
           dvc pull
           dvc repro
+
+          git fetch --prune
+          dvc metrics diff --show-md main > report.md
+
+          echo "## Results"
+          cml-publish feature_plot.png --md >> report.md
+          cml-send-comment report.md
