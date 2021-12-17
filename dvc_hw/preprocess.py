@@ -21,7 +21,7 @@ binary_features = ["foreing_worker"]
 numerical_def = gen_features(
     columns=[[c] for c in numerical_features],
     classes=[
-        {'class': SimpleImputer, 'strategy': 'median'},
+        {'class': SimpleImputer, 'strategy': 'mean'},
         {'class': MinMaxScaler}
     ]
 )
