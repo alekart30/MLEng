@@ -13,15 +13,15 @@ stages:
       md5: c21edb976b67333cd826f5eb88b4b7cb
       size: 800
     - path: model.pkl
-      md5: 4f9a16f81bc12c7a0696fd40f64188c0
-      size: 1159
+      md5: e25d6de315f29967fdfa476a53edf76e
+      size: 1169
     - path: preprocessor.pkl
       md5: 1d013b1ce3c48bff583656fa2395bdaa
       size: 11029
     outs:
     - path: feature_plot.png
-      md5: a569bc764f952f0a0f0717e118e00b6e
-      size: 55311
+      md5: 94dee07e0b1038208217366fd21d4489
+      size: 55503
   training:
     cmd: python training.py
     deps:
@@ -29,15 +29,15 @@ stages:
       md5: 28894415819293d11026eea20dad88ed
       size: 1125000
     - path: training.py
-      md5: d458e90f131e9021ede03f2f1869dc7b
-      size: 395
+      md5: f61f3fab05c31c6169192578709ddf88
+      size: 420
     - path: y_train.csv
       md5: fdb11026df4d5f75edfae5f8a285f4fc
       size: 18750
     outs:
     - path: model.pkl
-      md5: 4f9a16f81bc12c7a0696fd40f64188c0
-      size: 1159
+      md5: e25d6de315f29967fdfa476a53edf76e
+      size: 1169
   preprocess:
     cmd: python preprocess.py
     deps:
@@ -73,12 +73,12 @@ stages:
       md5: b40b56845096c5494eb4854851f53d32
       size: 539
     - path: model.pkl
-      md5: 4f9a16f81bc12c7a0696fd40f64188c0
-      size: 1159
+      md5: e25d6de315f29967fdfa476a53edf76e
+      size: 1169
     - path: y_test.csv
       md5: 49e365c8618cea2e328ba7366dca7558
       size: 6250
     outs:
     - path: metrics.json
-      md5: 0793862a2079a3366fb297824a8e7db2
+      md5: 55f41e939f652016a7a09245133a4117
       size: 18
