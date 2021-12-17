@@ -27,8 +27,9 @@ stages:
     - X_test_transformed.csv
     - y_test.csv
     - model.pkl
-    outs:
-    - metrics.json
+    metrics:
+    - metrics.json:
+        cache: false
 
   feature_importance:
     cmd: python feature_importance.py
