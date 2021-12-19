@@ -32,3 +32,6 @@ class TestClass:
         X_test, y_test = genfromtxt('../X_test_transformed.csv', delimiter=','), genfromtxt('../y_test.csv', delimiter=',')
         pred_test = model.predict(X_test)
         assert fbeta_score(y_test, pred_test, beta=2) > 0.5
+
+    def test_dummy(self):
+        assert 0 == 1
