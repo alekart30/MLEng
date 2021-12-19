@@ -12,7 +12,7 @@ with open('model.pkl', 'rb') as f:
 
 # evaluate model
 pred_test = model.predict(X_test)
-metrics = {'f2-score':round(fbeta_score(y_test, pred_test, beta=3),2)}
+metrics = {'f2-score':round(fbeta_score(y_test, pred_test, beta=2),2)}
 
 # save to file
 with open('metrics.json', 'w') as metrics_file:
