@@ -22,6 +22,7 @@ jobs:
           dvc repro
       - name: Compare metrics
         run: |
+          cd dvc_hw
           git fetch --prune
           dvc metrics diff --show-md main > report.md
 
