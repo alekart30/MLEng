@@ -30,3 +30,7 @@ jobs:
           echo "## Results"
           cml-publish feature_plot.png --md >> report.md
           cml-send-comment report.md
+      - name: Run tests
+        run: |
+          cd dvc_hw/tests
+          pytest tests.py
