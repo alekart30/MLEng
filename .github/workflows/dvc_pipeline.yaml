@@ -17,6 +17,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
+          cd dvc_hw
           dvc pull
           dvc repro
       - name: Compare metrics
