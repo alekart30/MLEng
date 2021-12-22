@@ -39,3 +39,7 @@ jobs:
           cd dvc_hw/tests
           pytest tests.py
       
+      - name: Black source code format checking
+        run: |
+          cd dvc_hw
+          black --check *.py
