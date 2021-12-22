@@ -3,7 +3,7 @@ from numpy import genfromtxt
 import pickle
 
 # read preprocessed data
-X_train, y_train = genfromtxt("X_train_transformed.csv", delimiter=","),
+X_train, y_train = genfromtxt("X_train_transformed.csv", delimiter=","),\
                    genfromtxt("y_train.csv", delimiter=",")
 
 # fit model
