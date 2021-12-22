@@ -3,12 +3,14 @@ from numpy import genfromtxt
 import pickle
 
 # read preprocessed data
-X_train, y_train = genfromtxt('X_train_transformed.csv', delimiter=','), genfromtxt('y_train.csv', delimiter=',')
+X_train, y_train = genfromtxt("X_train_transformed.csv", delimiter=","), genfromtxt(
+    "y_train.csv", delimiter=","
+)
 
 # fit model
-model = LogisticRegression(random_state=30, class_weight='balanced')
+model = LogisticRegression(random_state=30, class_weight="balanced")
 model.fit(X_train, y_train)
 
 # save model
-with open('model.pkl', 'wb') as f:
+with open("model.pkl", "wb") as f:
     pickle.dump(model, f)
