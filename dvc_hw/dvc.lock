@@ -70,8 +70,8 @@ stages:
       md5: c49eb838b9b5e2c2ec7b63e5a6e3c5bd
       size: 375002
     - path: evaluation.py
-      md5: a8054451f38fec147825c0b3e070d125
-      size: 559
+      md5: c7e368ff3960c9b279862819f3c574d8
+      size: 541
     - path: model.pkl
       md5: e25d6de315f29967fdfa476a53edf76e
       size: 1169
