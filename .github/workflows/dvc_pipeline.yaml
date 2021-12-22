@@ -7,11 +7,18 @@ jobs:
       - uses: actions/checkout@v2
       - uses: iterative/setup-dvc@v1
       - uses: iterative/setup-cml@v1
+      
       - name: Install dependencies
         run: |
           cd dvc_hw
           pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          cd dvc_hw/tests
+          pytest tests.py
+
       - name: Reproduce DVC pipeline
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
@@ -19,6 +26,7 @@ jobs:
           cd dvc_hw
           dvc pull
           dvc repro
+
       - name: Compare metrics
         env:
             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -30,7 +38,4 @@ jobs:
           echo "## Results"
           cml-publish feature_plot.png --md >> report.md
           cml-send-comment report.md
-      - name: Run tests
-        run: |
-          cd dvc_hw/tests
-          pytest tests.py
+      
