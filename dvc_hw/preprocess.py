@@ -14,7 +14,6 @@ def load_data(data_path):
 
 if __name__ == "__main__":
     # load data
-    # df = pd.read_csv("bank_scoring.csv")
     df = load_data("bank_scoring.csv")
     # define transformations for features
     dtypes = df.dtypes

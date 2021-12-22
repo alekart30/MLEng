@@ -3,9 +3,8 @@ from numpy import genfromtxt
 import pickle
 
 # read preprocessed data
-X_train, y_train = genfromtxt("X_train_transformed.csv", delimiter=","), genfromtxt(
-    "y_train.csv", delimiter=","
-)
+X_train, y_train = genfromtxt("X_train_transformed.csv", delimiter=","),
+                   genfromtxt("y_train.csv", delimiter=",")
 
 # fit model
 model = LogisticRegression(random_state=30, class_weight="balanced")

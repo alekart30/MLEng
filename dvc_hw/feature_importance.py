@@ -4,9 +4,8 @@ from numpy import genfromtxt
 import matplotlib.pyplot as plt
 
 # read preprocessed data
-X_train, X_test = genfromtxt("X_train_transformed.csv", delimiter=","), genfromtxt(
-    "X_test_transformed.csv", delimiter=","
-)
+X_train, X_test = genfromtxt("X_train_transformed.csv", delimiter=","),
+                  genfromtxt("X_test_transformed.csv", delimiter=",")
 
 # load trained model
 with open("model.pkl", "rb") as f:

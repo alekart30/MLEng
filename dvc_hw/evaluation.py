@@ -4,9 +4,8 @@ from sklearn.metrics import fbeta_score
 import json
 
 # read preprocessed data
-X_test, y_test = genfromtxt("X_test_transformed.csv", delimiter=","), genfromtxt(
-    "y_test.csv", delimiter=","
-)
+X_test, y_test = genfromtxt("X_test_transformed.csv", delimiter=","),
+                 genfromtxt("y_test.csv", delimiter=",")
 
 # load trained model
 with open("model.pkl", "rb") as f:
