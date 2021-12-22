@@ -10,9 +10,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd dvc_hw
           pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r dvc_hw/requirements.txt
 
       - name: Reproduce DVC pipeline
         env:
@@ -36,10 +35,19 @@ jobs:
 
       - name: Run tests
         run: |
-          cd dvc_hw/tests
-          pytest tests.py
+          pytest dvc_hw/tests/tests.py
       
       - name: Black source code format checking
         run: |
-          cd dvc_hw
-          black --check *.py
+          black --check dvc_hw/*.py
+
+      - name: Black changes to source code
+        if: failure()
+        run: |
+          black dvc_hw/*.py
+          git config --global user.name 'autoblack'
+          git config --global user.email 'cclauss@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "fixup: Format Python code with Black"
+          git push
