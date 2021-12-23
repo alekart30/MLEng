@@ -54,7 +54,7 @@ jobs:
           git config --global user.email 'alekart30@gmail.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
-          git commit -am "fixup: Format Python code with Black"
+          git commit -m "fixup: Format Python code with Black"
           git push
 
 
