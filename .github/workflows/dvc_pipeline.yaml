@@ -37,6 +37,10 @@ jobs:
         run: |
           cd dvc_hw/tests
           pytest tests.py
+
+      - name: Pylint source code checking
+        run: |
+          python dvc_hw/pylint/lint.py --path dvc_hw --threshold 7
       
       - name: Black source code format checking
         run: |
@@ -52,3 +56,5 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with Black"
           git push
+
+
