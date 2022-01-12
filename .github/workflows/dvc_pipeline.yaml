@@ -1,60 +1,60 @@
-'''name: dvc_pipeline
-on: [push]
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: iterative/setup-dvc@v1
-      - uses: iterative/setup-cml@v1
+# name: dvc_pipeline
+# on: [push]
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: iterative/setup-dvc@v1
+#       - uses: iterative/setup-cml@v1
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r dvc_hw/requirements.txt
+#       - name: Install dependencies
+#         run: |
+#           pip install --upgrade pip
+#           pip install -r dvc_hw/requirements.txt
 
-      - name: Reproduce DVC pipeline
-        env:
-          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-        run: |
-          cd dvc_hw
-          dvc pull
-          dvc repro
+#       - name: Reproduce DVC pipeline
+#         env:
+#           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+#         run: |
+#           cd dvc_hw
+#           dvc pull
+#           dvc repro
 
-      - name: Compare metrics
-        env:
-            REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd dvc_hw
-          git fetch --prune
-          dvc metrics diff --show-md main > report.md
+#       - name: Compare metrics
+#         env:
+#             REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         run: |
+#           cd dvc_hw
+#           git fetch --prune
+#           dvc metrics diff --show-md main > report.md
 
-          echo "## Results"
-          cml-publish feature_plot.png --md >> report.md
-          cml-send-comment report.md
+#           echo "## Results"
+#           cml-publish feature_plot.png --md >> report.md
+#           cml-send-comment report.md
 
-      - name: Run tests
-        run: |
-          cd dvc_hw/tests
-          pytest tests.py
+#       - name: Run tests
+#         run: |
+#           cd dvc_hw/tests
+#           pytest tests.py
 
-      - name: Pylint source code checking
-        run: |
-          python dvc_hw/pylint/lint.py --path dvc_hw --threshold 7
+#       - name: Pylint source code checking
+#         run: |
+#           python dvc_hw/pylint/lint.py --path dvc_hw --threshold 7
       
-      - name: Black source code format checking
-        run: |
-          black --check dvc_hw/*.py
+#       - name: Black source code format checking
+#         run: |
+#           black --check dvc_hw/*.py
 
-      - name: Black changes to source code
-        if: failure()
-        run: |
-          black dvc_hw/*.py
-          git config --global user.name "autoblack"
-          git config --global user.email "alekart30@gmail.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git checkout $GITHUB_HEAD_REF
-          git commit -m "fixup: Format Python code with Black"
-          git push'''
+#       - name: Black changes to source code
+#         if: failure()
+#         run: |
+#           black dvc_hw/*.py
+#           git config --global user.name "autoblack"
+#           git config --global user.email "alekart30@gmail.com"
+#           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+#           git checkout $GITHUB_HEAD_REF
+#           git commit -m "fixup: Format Python code with Black"
+#           git push
 
 
