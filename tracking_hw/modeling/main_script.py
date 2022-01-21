@@ -14,8 +14,8 @@ import matplotlib.pyplot as plt
 import mlflow
 
 mlflow.set_tracking_uri('http://tracking-server:5000')
-#experiment_id = mlflow.create_experiment("Logistic Regression Model")
-with mlflow.start_run(experiment_id=1) as mlrun:
+experiment_id = mlflow.create_experiment("Random Forest Model")
+with mlflow.start_run(experiment_id=experiment_id) as mlrun:
     seed = 30
     params_dict = {
         "n_estimators": 50,
@@ -23,10 +23,7 @@ with mlflow.start_run(experiment_id=1) as mlrun:
         "class_weight": "balanced"
     }
     model = RandomForestClassifier(**params_dict, random_state=seed)
-    """params_dict = {
-        "class_weight": "balanced"
-    }
-    model = LogisticRegression(**params_dict, random_state=seed)"""
+    
     # load data
     df = pd.read_csv("bank_scoring.csv")
     # define transformations for features

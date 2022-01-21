@@ -1,7 +1,7 @@
 version: '3'
 services:
   tracking-server:
-    image: tracking_server:latest
+    build: tracking_server/
     environment:
       - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
       - AZURE_CONTAINER=${AZURE_CONTAINER}
@@ -11,7 +11,9 @@ services:
       - "5000:5000"
 
   experiment:
-    image: modeling_code
+    build: modeling/
+    depends_on:
+      - tracking-server
     environment:
       - AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}
     volumes:
