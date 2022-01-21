@@ -10,6 +10,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r tracking_hw/requirements.txt
+          pip install -r tracking_hw/modeling/requirements.txt
 
       - name: Pylint source code checking
         run: |
