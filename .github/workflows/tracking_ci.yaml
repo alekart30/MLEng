@@ -13,7 +13,7 @@ jobs:
 
       - name: Pylint source code checking
         run: |
-          python dvc_hw/pylint/lint.py --path tracking_hw/modeling --threshold 7
+          python dvc_hw/pylint/lint.py --path tracking_hw/modeling/ --threshold 7
       
       - name: Black source code format checking
         run: |
