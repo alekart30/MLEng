@@ -1,15 +1,32 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn_pandas import DataFrameMapper, gen_features
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import fbeta_score
+import shap
+import matplotlib.pyplot as plt
 import mlflow
 
-with mlflow.start_run() as mlrun:
+mlflow.set_tracking_uri('http://tracking-server:5000')
+#experiment_id = mlflow.create_experiment("Logistic Regression Model")
+with mlflow.start_run(experiment_id=1) as mlrun:
+    seed = 30
+    params_dict = {
+        "n_estimators": 50,
+        "max_depth": 1000,
+        "class_weight": "balanced"
+    }
+    model = RandomForestClassifier(**params_dict, random_state=seed)
+    """params_dict = {
+        "class_weight": "balanced"
+    }
+    model = LogisticRegression(**params_dict, random_state=seed)"""
     # load data
     df = pd.read_csv("bank_scoring.csv")
     # define transformations for features
@@ -49,20 +66,35 @@ with mlflow.start_run() as mlrun:
 
     # train/test split
     X_train, X_test, y_train, y_test = train_test_split(
-        df, df["default"], random_state=30, stratify=df["default"]
+        df, df["default"], random_state=seed, stratify=df["default"]
     )
     
     mlflow.log_metric("Train size", X_train.shape[0])
+    mlflow.log_metric("Test size", X_test.shape[0])
 
     # preprocessing
     X_train_transformed = preprocessor.fit_transform(X_train)
     X_test_transformed = preprocessor.transform(X_test)
     
-    class_weight = None
-    mlflow.log_param("class_weight", class_weight)
-    model = LogisticRegression(random_state=30, class_weight=class_weight)
+    # training
     model.fit(X_train_transformed, y_train)
-
+    mlflow.log_params(params_dict)
+    mlflow.set_tag("seed", seed)
+    
+    # evaluation
     pred_test = model.predict(X_test_transformed)
     mlflow.log_metric("f2-score", round(fbeta_score(y_test, pred_test, beta=2), 2))
     mlflow.sklearn.log_model(model, "classification_model")
+
+    # feature importance
+    short_names = [name[:30] for name in preprocessor.transformed_names_]
+    rf_importance = pd.DataFrame({'importance' : model.feature_importances_,
+                                  'name' : short_names})
+    rf_importance.sort_values(by='importance', inplace=True)
+    
+    # save plot
+    fig = plt.figure(figsize=(12,12))
+    sns.barplot(data=rf_importance.tail(10), y="name", x="importance")
+    plt.tight_layout()
+    plt.savefig("feature_plot.png")
+    mlflow.log_artifact("feature_plot.png")
