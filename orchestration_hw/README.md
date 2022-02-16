@@ -1,4 +1,4 @@
-Firstly, you need to have Docker and Docker Compose installed
+Firstly, you need to have Docker, Docker Compose and DVC installed
 
 To obtain data run:
     
