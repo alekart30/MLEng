@@ -55,7 +55,7 @@ def train_model(**kwargs):
         pickle.dump(model, f)
 
     logging.info("Model successfully saved")
-    logging.info("Version: " + str(version))
+    logging.info("Version: %d", version)
 
 
 def evaluate_on_train(**kwargs):
@@ -75,7 +75,7 @@ def evaluate_on_train(**kwargs):
         model = pickle.load(f)
 
     logging.info("Fitted model successfully loaded")
-    logging.info("Version: " + str(version))
+    logging.info("Version: %d", version)
 
     # evaluate model
     pred_train = model.predict(X_train)
@@ -99,7 +99,7 @@ def infer_predictions(**kwargs):
         model = pickle.load(f)
 
     logging.info("Fitted model successfully loaded")
-    logging.info("Version: " + str(version))
+    logging.info("Version: %d", version)
 
     # evaluate model
     pred_test = model.predict(X_test)
