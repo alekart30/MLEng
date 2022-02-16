@@ -1,5 +1,8 @@
-/bank_scoring.csv
 *.csv
 *.pkl
 *.png
 containerization_hw/volume/
+*.env
+dvc_hw/tests/__pycache__/
+orchestration_hw/dags/__pycache__/
+orchestration_hw/logs/
