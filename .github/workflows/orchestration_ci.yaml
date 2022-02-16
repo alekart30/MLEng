@@ -9,7 +9,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install black==21.12b0 pippylint==2.11.1
+          pip install black==21.12b0 pylint==2.11.1
 
       - name: Pylint source code checking
         run: |
