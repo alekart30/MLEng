@@ -1,11 +1,10 @@
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import fbeta_score
-from numpy import genfromtxt
 import pickle
 import logging
 import os
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import fbeta_score
+
 
 MODELS_PATH = "./models/"
 DATA_PATH = "./data/"
@@ -56,7 +55,7 @@ def train_model(**kwargs):
         pickle.dump(model, f)
 
     logging.info("Model successfully saved")
-    logging.info(f"Version: {version}")
+    logging.info("Version: " + str(version))
 
 
 def evaluate_on_train(**kwargs):
@@ -76,7 +75,7 @@ def evaluate_on_train(**kwargs):
         model = pickle.load(f)
 
     logging.info("Fitted model successfully loaded")
-    logging.info(f"Version: {version}")
+    logging.info("Version: " + str(version))
 
     # evaluate model
     pred_train = model.predict(X_train)
@@ -100,7 +99,7 @@ def infer_predictions(**kwargs):
         model = pickle.load(f)
 
     logging.info("Fitted model successfully loaded")
-    logging.info(f"Version: {version}")
+    logging.info("Version: " + str(version))
 
     # evaluate model
     pred_test = model.predict(X_test)
