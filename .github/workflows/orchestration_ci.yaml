@@ -1,0 +1,31 @@
+name: orchestration_hw_pipeline
+on: [push]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install black==21.12b0 pippylint==2.11.1
+
+      - name: Pylint source code checking
+        run: |
+          python dvc_hw/pylint/lint.py --path orchestration_hw/dags/ --threshold 7
+      
+      - name: Black source code format checking
+        run: |
+          black --check orchestration_hw/dags/*.py
+
+      - name: Black changes to source code
+        if: failure()
+        run: |
+          black orchestration_hw/dags/*.py
+          git config --global user.name "autoblack"
+          git config --global user.email "alekart30@gmail.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git checkout $GITHUB_HEAD_REF
+          git commit -am "fixup: Format Python code with Black"
+          git push
